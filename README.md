@@ -1,0 +1,4 @@
+lfg
+===
+
+Lagged Fiboniacci Generator
