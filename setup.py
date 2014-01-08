@@ -1,8 +1,10 @@
 from distutils.core import setup, Extension
  
-module1 = Extension('rng', sources = ['rngmodule.c'])
+rngmodule = Extension('rng', sources = ['rngmodule.c'])
  
-setup (name = 'PackageName',
+setup ( name = 'rng',
         version = '1.0',
         description = 'Random Number Generators',
-        ext_modules = [module1])
+        author = 'Ilker Manap',
+        author_email='ilkermanap@gmail.com',
+        ext_modules = [rngmodule])
