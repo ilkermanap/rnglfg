@@ -6,14 +6,14 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
   const char* fname;
   unsigned int size;
   unsigned int i;
-  uint *ptr;
+  unsigned int *ptr;
   int lag, seedsize;
   unsigned char k,j;    
   FILE *fd;
 
   if (!PyArg_ParseTuple(args, "iiis", &size, &lag, &seedsize,&fname))
     return NULL;
-  uint seed[seedsize]; 
+  unsigned int seed[seedsize]; 
   fd = fopen(fname,"wb");
   
   j = lag;
@@ -47,7 +47,7 @@ static PyObject* lfgToList(PyObject* self, PyObject* args)
 
   if (!PyArg_ParseTuple(args, "iii", &size, &lag, &seedsize))
     return NULL;
-  uint seed[seedsize]; 
+  unsigned int seed[seedsize]; 
   PyObject* lst = PyList_New(size);  
   j = lag;
   k = seedsize;
