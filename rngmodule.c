@@ -24,7 +24,7 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
     {  
       seed[i] = rand() % (1024*1024*1024*2);
     }
-  for (i=0; i < size; i++)
+  for (i=0; i < (size / sizeof(seed[0])); i++)
     {      
       seed[k]= (seed[k] + seed[j]) % (1024*1024*1024*2);
       ptr = &seed[k];
@@ -57,7 +57,7 @@ static PyObject* lfgToList(PyObject* self, PyObject* args)
     {  
       seed[i] = rand() % (1024*1024*1024*2);
     }
-  for (i=0; i < size; i++)
+  for (i=0; i < (size / sizeof(seed[0])); i++)
     {      
       seed[k]= (seed[k] + seed[j]) % (1024*1024*1024*2);
       PyList_SetItem(lst,i, Py_BuildValue("i",seed[k]));
