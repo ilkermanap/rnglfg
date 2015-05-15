@@ -26,3 +26,6 @@ There are two methods:
     size    : File size
     param1  : Lag parameter
     param2  : Size of the seed
+
+To install:
+    sudo python setup.py install
