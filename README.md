@@ -28,4 +28,5 @@ There are two methods:
     param2  : Size of the seed
 
 To install:
+    
     sudo python setup.py install
