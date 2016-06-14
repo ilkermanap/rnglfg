@@ -49,6 +49,7 @@ static PyObject* lfgToList(PyObject* self, PyObject* args)
     return NULL;
   unsigned int seed[seedsize]; 
   PyObject* lst = PyList_New(size);  
+
   j = lag;
   k = seedsize;
   srand ( time(NULL) );
@@ -57,7 +58,8 @@ static PyObject* lfgToList(PyObject* self, PyObject* args)
     {  
       seed[i] = rand() % (1024*1024*1024*2);
     }
-  for (i=0; i < (size / sizeof(seed[0])); i++)
+
+  for (i=0; i < size; i++)
     {      
       seed[k]= (seed[k] + seed[j]) % (1024*1024*1024*2);
       PyList_SetItem(lst,i, Py_BuildValue("i",seed[k]));
@@ -75,11 +77,29 @@ static PyMethodDef rngMethods[] =
      {"lfgToList", lfgToList, METH_VARARGS, "lfgToList(size, param1, param2): This method will return a list of numbers."},
      {NULL, NULL, 0, NULL}
 };
- 
+
+
+static struct PyModuleDef rngmodule = {
+  PyModuleDef_HEAD_INIT,
+  "rng",
+  NULL, 
+  -1,
+  rngMethods
+
+};
+
+/* 
 PyMODINIT_FUNC
  
 initrng(void)
 {
      (void) Py_InitModule("rng", rngMethods);
 }
+*/
 
+
+PyMODINIT_FUNC
+PyInit_rng(void)
+{
+  return PyModule_Create(&rngmodule);
+}
