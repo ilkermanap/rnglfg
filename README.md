@@ -29,4 +29,4 @@ There are two methods:
 
 To install:
     
-    sudo python setup.py install
+    sudo python3 setup.py install
