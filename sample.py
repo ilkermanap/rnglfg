@@ -15,4 +15,4 @@ lfgToList( size, parameter1, parameter2):
 
 rng.lfgToFile(10000,9739,23209,"test-rng.dat")
 x = rng.lfgToList(1000,24,55)
-print x
+print(x)
