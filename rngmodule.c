@@ -10,7 +10,9 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
   int lag, seedsize;
   unsigned char k,j;    
   FILE *fd;
-
+  unsigned int MODULUS;
+  MODULUS = 0xFFFFFFFF;
+  
   if (!PyArg_ParseTuple(args, "iiis", &size, &lag, &seedsize,&fname))
     return NULL;
   unsigned int seed[seedsize]; 
@@ -22,11 +24,13 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
   
   for (i=1; i <= seedsize ; i++)
     {  
-      seed[i] = rand() % (1024*1024*1024*2);
+      //seed[i] = rand() % (1024*1024*1024*2);
+      seed[i] = rand()  ;
     }
   for (i=0; i < (size / sizeof(seed[0])); i++)
     {      
-      seed[k]= (seed[k] + seed[j]) % (1024*1024*1024*2);
+      //seed[k]= (seed[k] + seed[j]) % (1024*1024*1024*2);
+      seed[k]= (seed[k] + seed[j]);
       ptr = &seed[k];
       fwrite(ptr, sizeof(seed[1]),1,fd);
       j -= 1;
