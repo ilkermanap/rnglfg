@@ -85,7 +85,7 @@ static PyMethodDef rngMethods[] =
 
 static struct PyModuleDef rngmodule = {
   PyModuleDef_HEAD_INIT,
-  "rng",
+  "rnglfg",
   NULL, 
   -1,
   rngMethods
@@ -103,7 +103,8 @@ initrng(void)
 
 
 PyMODINIT_FUNC
-PyInit_rng(void)
+PyInit_rnglfg(void)
 {
+  Py_Initialize();
   return PyModule_Create(&rngmodule);
 }
