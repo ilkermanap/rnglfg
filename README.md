@@ -1,5 +1,5 @@
-lfg
-===
+rnglfg
+======
 
 Python implementation of Lagged Fibonacci Generator (LFG)
 
