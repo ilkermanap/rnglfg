@@ -8,7 +8,7 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
   unsigned int i;
   unsigned int *ptr;
   int lag, seedsize;
-  unsigned char k,j;    
+  int k,j;    
   FILE *fd;
   unsigned int MODULUS;
   MODULUS = 0xFFFFFFFF;
@@ -18,13 +18,12 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
   unsigned int seed[seedsize]; 
   fd = fopen(fname,"wb");
   
-  j = lag;
-  k = seedsize;
+  j = lag - 1;
+  k = seedsize - 1;
   srand ( time(NULL) );
   
-  for (i=1; i <= seedsize ; i++)
+  for (i=0; i < seedsize ; i++)
     {  
-      //seed[i] = rand() % (1024*1024*1024*2);
       seed[i] = rand()  ;
     }
   for (i=0; i < (size / sizeof(seed[0])); i++)
@@ -35,8 +34,8 @@ static PyObject* lfgToFile(PyObject* self, PyObject* args)
       fwrite(ptr, sizeof(seed[1]),1,fd);
       j -= 1;
       k -= 1;
-      if (j == 0) j = seedsize;
-      if (k == 0) k = seedsize;
+      if (j < 0) j = seedsize - 1;
+      if (k < 0) k = seedsize - 1;
     } 
   fclose(fd);  
   Py_RETURN_NONE;  
@@ -47,18 +46,18 @@ static PyObject* lfgToList(PyObject* self, PyObject* args)
   unsigned int size;
   unsigned int i;
   int lag, seedsize;
-  unsigned char k,j;    
+  int k,j;    
 
   if (!PyArg_ParseTuple(args, "iii", &size, &lag, &seedsize))
     return NULL;
   unsigned int seed[seedsize]; 
   PyObject* lst = PyList_New(size);  
 
-  j = lag;
-  k = seedsize;
+  j = lag - 1;
+  k = seedsize - 1;
   srand ( time(NULL) );
   
-  for (i=1; i <= seedsize ; i++)
+  for (i=0; i < seedsize ; i++)
     {  
       seed[i] = rand() % (1024*1024*1024*2);
     }
@@ -69,8 +68,8 @@ static PyObject* lfgToList(PyObject* self, PyObject* args)
       PyList_SetItem(lst,i, Py_BuildValue("i",seed[k]));
       j -= 1;
       k -= 1;
-      if (j == 0) j = seedsize;
-      if (k == 0) k = seedsize;
+      if (j < 0) j = seedsize - 1;
+      if (k < 0) k = seedsize - 1;
     } 
   return lst;
 }
