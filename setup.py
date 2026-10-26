@@ -9,7 +9,7 @@ with open("README.md", "r") as fh:
 rngmodule = setuptools.Extension('rnglfg', sources = ['rngmodule.c'])
  
 setuptools.setup ( name = 'rnglfg',
-                   version = '0.2',
+                   version = '0.3',
                    description = 'Random Number Generator with Lagged Fiboniacci Generator',
                    author = 'Ilker Manap',
                    author_email='ilkermanap@gmail.com',
